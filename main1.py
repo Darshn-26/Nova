@@ -1,4 +1,5 @@
 import os
+import re
 import dotenv
 import subprocess
 import speech_recognition as sr
@@ -39,7 +40,7 @@ generation_config = {
 model = genai.GenerativeModel(
     model_name="gemini-1.5-pro",
     generation_config=generation_config,
-    system_instruction="You are Nova, an AI assistant. Respond to commands with a personal touch and assist with various tasks. Give short and sweet responses to questions. Don't use emojis (abbreviations are ok)."
+    system_instruction="You are Nova, an AI assistant. Respond to commands with a personal touch and assist with various tasks. Give short and sweet responses to questions. Don't use emojis (abbreviations are ok).with the ability to find direct links to websites or research papers."
 )
 
 class VoiceAssistant:
@@ -105,7 +106,7 @@ class VoiceAssistant:
             print(f"You said: {command}")
             self.process_command(command)
         except sr.UnknownValueError:
-            self.speak("I'm listening. Go ahead.")
+            self.speak("Go ahead. I'm listening. ")
         except sr.RequestError:
             self.speak("There was an error with the speech recognition service.")
 
@@ -155,10 +156,42 @@ class VoiceAssistant:
         self.speak("Browser opened.")
 
     def web_search(self, query):
-        """Search on Google."""
-        url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
-        webbrowser.open(url)
-        self.speak(f"Searching for {query} on Google.")
+        """Search for direct links using Gemini or fallback to Google search."""
+        try:
+            # Initialize chat session if not already done
+            if not self.chat_session:
+                self.chat_session = model.start_chat(
+                    history=[
+                        {
+                            "role": "user",
+                            "parts": ["You are Nova, a helpful assistant. Please help find direct links to resources."],
+                        }
+                    ]
+                )
+
+            # Send a query to Gemini to find a direct link
+            response = self.chat_session.send_message(
+                {"parts": [f"Can you find a direct link for {query}? Provide only the most relevant URL."]}
+            )
+            reply = response.text.strip()
+            print(f"Gemini's response: {reply}")
+
+            # Extract URL using a regex
+            url_match = re.search(r'https?://[^\s\]]+', reply)  # Matches URLs starting with http or https
+            if url_match:
+                url = url_match.group(0)
+                self.speak(f"Opening the link I found for {query}.")
+                webbrowser.open(url)
+            else:
+                # Fallback to a Google search
+                self.speak("I couldn't find a direct link. Performing a Google search instead.")
+                url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
+                webbrowser.open(url)
+        except Exception as e:
+            self.speak("There was an error fetching the link. I'll perform a Google search instead.")
+            print(f"Error: {e}")
+            url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
+            webbrowser.open(url)
 
     def close_window(self):
         """Close the active window."""
