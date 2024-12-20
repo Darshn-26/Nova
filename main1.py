@@ -15,6 +15,7 @@ from datetime import datetime
 import gesture
 import spacy
 from spacy.cli import download
+import analyse
 
 # Ensure spaCy model is available
 try:
@@ -87,6 +88,7 @@ class VoiceAssistant:
             "track gesture": self.track_gesture,
             "gesture tracking": self.track_gesture,
             "start tracking": self.track_gesture,
+            "analyse window":self.analyze_window,
         }
 
     def speak(self, text):
@@ -115,6 +117,9 @@ class VoiceAssistant:
         if "stop tracking" in command:
             self.stop_tracking_flag = True
             self.speak("Stopping gesture tracking.")
+            return
+        if "analyze window" in command or "analyse window" in command:
+            self.analyze_window()
             return
 
         # Use NLP to match commands
@@ -263,6 +268,17 @@ class VoiceAssistant:
 
     def track_gesture(self):
         gesture.track_gesture(self.speak)
+    
+    def analyze_window(self):
+        """Invoke the screenshot and analyze functionality."""
+        self.speak("Capturing and analyzing the window. Please wait.")
+        try:
+            response_text = analyse.screenshot_and_analyze()
+            self.speak(response_text)
+            self.speak("Analysis completed !.")
+        except Exception as e:
+            self.speak("An error occurred while analyzing the window.")
+            print(f"Error: {e}")
 
 # Main program loop
 def main():
