@@ -1,3 +1,4 @@
+#for macos
 import os
 import re
 import dotenv
