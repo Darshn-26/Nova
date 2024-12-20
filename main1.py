@@ -271,7 +271,7 @@ class VoiceAssistant:
     
     def analyze_window(self):
         """Invoke the screenshot and analyze functionality."""
-        self.speak("Capturing and analyzing the window. Please wait.")
+        self.speak("Capturing and analyzing the window. Please wait")
         try:
             response_text = analyse.screenshot_and_analyze()
             self.speak(response_text)

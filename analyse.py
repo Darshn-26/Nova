@@ -3,6 +3,7 @@ import mss
 import google.generativeai as genai
 import pyttsx3
 
+
 def speak(text):
     """Uses pyttsx3 to convert text to speech."""
     engine = pyttsx3.init()
@@ -30,14 +31,13 @@ def configure_gemini():
 def upload_to_gemini(path, mime_type=None):
     """Uploads the given file to Gemini."""
     file = genai.upload_file(path, mime_type=mime_type)
-    print(f"Uploaded ur active screen !")
+    print("Analysing ur active screen !")
     speak("Analysing ur active screen !")
     return file
 
 
 def screenshot_and_analyze():
     """Takes a screenshot, uploads it to Gemini, and returns the analysis."""
-    print("Starting screenshot and analysis process...")
     model = configure_gemini()
 
     # Take a screenshot and save it as a file
@@ -46,7 +46,8 @@ def screenshot_and_analyze():
         os.makedirs(screenshot_folder, exist_ok=True)
         screenshot_path = os.path.join(screenshot_folder, "screenshot.png")
         sct.shot(output=screenshot_path)
-        print(f"Screenshot saved to {screenshot_path}")
+        print("Captured ur active screen starting analysis !")
+        speak("Captured ur active screen !")
 
     # Upload the screenshot to Gemini
     uploaded_file = upload_to_gemini(screenshot_path, mime_type="image/png")
