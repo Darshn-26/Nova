@@ -1,6 +1,6 @@
 # Nova
 # NOVA - AI-Powered Personal Assistant
-
+# (Built for mac os !)
 **NOVA** is a sophisticated voice-controlled AI assistant built using advanced speech recognition, natural language processing, and web automation technologies. With Nova, you can interact with your computer seamlessly, perform web searches, automate tasks in your browser, and more. It integrates the powerful **Gemini API** to respond intelligently to your commands and provide dynamic web-based interactions.
 
 ## Features
