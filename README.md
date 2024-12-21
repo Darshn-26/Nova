@@ -11,6 +11,7 @@ Welcome to **NOVA**, an AI-powered virtual assistant designed to redefine produc
 ### 2. **Gesture Tracking**
    - Contactless interaction through advanced gesture recognition.
    - Perfect for hands-free environments, enhancing accessibility and efficiency.
+   - Tracks your eye blink to click 
 
 ### 3. **AI-Integrated Assistant**
    - Powered by Google Gemini, NOVA offers intelligent, context-aware assistance.
