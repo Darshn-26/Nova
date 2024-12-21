@@ -1,4 +1,4 @@
-# NOVA - Next-Gen Optimized Virtual Assistant
+# NOVA - Neural Optimized Virtual Assistant
 # (Currently Bulit for mac os !)
 Welcome to **NOVA**, an AI-powered virtual assistant designed to redefine productivity and enhance your interaction with technology. NOVA combines the latest in generative AI, gesture recognition, and local system integration to deliver a seamless, efficient, and innovative user experience.
 
