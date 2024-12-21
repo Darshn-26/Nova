@@ -13,7 +13,7 @@ def speak(text):
 
 def configure_gemini():
     """Configures Gemini with the API key from environment variables."""
-    genai.configure(api_key='AIzaSyBZr3iIG2PQ12UPhg5h6NTm0GXu3fh-7G4')
+    genai.configure(api_key='API KEY HERE')
     generation_config = {
         "temperature": 1,
         "top_p": 0.95,
