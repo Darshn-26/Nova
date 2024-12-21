@@ -36,7 +36,7 @@ Welcome to **NOVA**, an AI-powered virtual assistant designed to redefine produc
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/nova-virtual-assistant.git
+   git clone https://github.com/Darshn-26/Nova
    ```
 
 2. Navigate to the project directory:
@@ -110,9 +110,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 🌐 Connect with Us
 
-- **Website**: [nova-assistant.io](https://nova-assistant.io)
-- **GitHub**: [github.com/yourusername/nova-virtual-assistant](https://github.com/yourusername/nova-virtual-assistant)
-- **Email**: support@nova-assistant.io
+
+- **GitHub**: [https://github.com/Darshn-26/Nova]
+- **Email**: [darshanpr26@gmail.com]
 
 ---
 
