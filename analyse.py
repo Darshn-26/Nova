@@ -13,7 +13,7 @@ def speak(text):
 
 def configure_gemini():
     """Configures Gemini with the API key from environment variables."""
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    genai.configure(api_key='AIzaSyBZr3iIG2PQ12UPhg5h6NTm0GXu3fh-7G4')
     generation_config = {
         "temperature": 1,
         "top_p": 0.95,
@@ -24,7 +24,7 @@ def configure_gemini():
     return genai.GenerativeModel(
         model_name="gemini-1.5-pro",
         generation_config=generation_config,
-        system_instruction="Analyze the uploaded screenshot imageand provide the analysis in short(about 60 words max) (make sure use professional words and phrases).",
+        system_instruction="Ignore terminal window image .Analyze the uploaded screenshot imageand provide the analysis (make sure use professional words and phrases) If u see educational documents summeraise with longer seponse but keep it simple .",
     )
 
 
@@ -44,7 +44,7 @@ def screenshot_and_analyze():
     with mss.mss() as sct:
         screenshot_folder = "Analyse"
         os.makedirs(screenshot_folder, exist_ok=True)
-        screenshot_path = os.path.join(screenshot_folder, "screenshot.png")
+        screenshot_path = os.path.join(screenshot_folder, "snapshot.png")
         sct.shot(output=screenshot_path)
         print("Captured ur active screen starting analysis !")
         speak("Captured ur active screen !")
@@ -62,8 +62,9 @@ def screenshot_and_analyze():
         ]
     )
 
-    response = chat_session.send_message("Please analyze the content of this image.")
+    response = chat_session.send_message("Please analyze the content of this image.Ignore the terminal window here")
     response_text = response.text.strip()
     print("AI Response:", response_text)
+
 
     return response_text
